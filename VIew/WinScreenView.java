@@ -14,16 +14,14 @@ public class WinScreenView extends JFrame {
     public WinScreenView(String winner, Map<Integer, Integer> roundStats) {
         setTitle("Результаты игры");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400); // Размер окна
-        setLocationRelativeTo(null); // Центрирование окна на экране
+        setSize(500, 400);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Создаем верхний блок с результатом
         winnerLabel = new JLabel("Победитель: " + winner, SwingConstants.CENTER);
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 16));
         add(winnerLabel, BorderLayout.NORTH);
 
-        // Преобразуем карту статистики в читаемую строку
         StringBuilder statsBuilder = new StringBuilder();
         statsBuilder.append("Результаты по раундам:\n");
         int roundNumber = 1;
@@ -34,15 +32,13 @@ public class WinScreenView extends JFrame {
             roundNumber++;
         }
 
-        // Создаем область для отображения результатов статистики
         roundStatsArea = new JTextArea(statsBuilder.toString());
-        roundStatsArea.setEditable(false); // Отключаем возможность редактирования пользователем
-        roundStatsArea.setLineWrap(true); // Разбивка строк
-        roundStatsArea.setWrapStyleWord(true); // Перенос по словам
-        JScrollPane scrollPane = new JScrollPane(roundStatsArea); // Добавляем прокрутку
+        roundStatsArea.setEditable(false);
+        roundStatsArea.setLineWrap(true);
+        roundStatsArea.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(roundStatsArea);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Создаем нижнюю панель с кнопками
         JPanel buttonPanel = new JPanel(new FlowLayout());
         playAgainButton = new JButton("Сыграть еще раз");
         backToMenuButton = new JButton("В главное меню");
@@ -53,12 +49,10 @@ public class WinScreenView extends JFrame {
         setVisible(true); // Отображаем окно
     }
 
-    // Добавление слушателя для кнопки «Сыграть еще раз»
     public void addPlayAgainListener(ActionListener listener) {
         playAgainButton.addActionListener(listener);
     }
 
-    // Добавление слушателя для кнопки «В главное меню»
     public void addBackToMenuListener(ActionListener listener) {
         backToMenuButton.addActionListener(listener);
     }

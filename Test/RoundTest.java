@@ -63,4 +63,28 @@ public class RoundTest {
         Player winner = round.getWinner(player1, player2);
         assertEquals(player1, winner, "Player 1 should win the round");
     }
+
+    @Test
+    public void testRoundInitialization() {
+        Player p1 = new Player("Northern Kingdoms", new ArrayList<>(), false);
+        Player p2 = new Player("Nilfgaard", new ArrayList<>(), true);
+
+        Round round = new Round(p1, p2, 1);
+        round.start(null);
+
+        assertSame(p1, round.getCurrentPlayer());
+    }
+
+    @Test
+    public void testNextTurn() {
+        round.start(null);
+
+        assertSame(player1, round.getCurrentPlayer(), "Player 1 должен быть текущим игроком в начале раунда");
+
+        round.nextTurn();
+        assertSame(player2, round.getCurrentPlayer(), "После вызова nextTurn() текущим игроком должен быть Player 2");
+
+        round.nextTurn();
+        assertSame(player1, round.getCurrentPlayer(), "После второго вызова nextTurn() текущим игроком должен снова быть Player 1");
+    }
 }

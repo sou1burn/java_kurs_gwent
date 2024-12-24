@@ -27,6 +27,12 @@ public class GameFieldView extends JFrame {
     private JLabel opponentScoreLabel;
     private JLabel playerFactionIcon;
     private JLabel opponentFactionIcon;
+    private JLabel playerMeleeScoreLabel;
+    private JLabel playerRangedScoreLabel;
+    private JLabel playerSiegeScoreLabel;
+    private JLabel opponentMeleeScoreLabel;
+    private JLabel opponentRangedScoreLabel;
+    private JLabel opponentSiegeScoreLabel;
 
     public GameFieldView() {
         setTitle("Гвинт - Игровое поле");
@@ -34,6 +40,13 @@ public class GameFieldView extends JFrame {
         setSize(1700, 900);
         setLocationRelativeTo(null);
         setLayout(new GridBagLayout());
+
+        playerMeleeScoreLabel = new JLabel("Очки: 0");
+        playerRangedScoreLabel = new JLabel("Очки: 0");
+        playerSiegeScoreLabel = new JLabel("Очки: 0");
+        opponentMeleeScoreLabel = new JLabel("Очки: 0");
+        opponentRangedScoreLabel = new JLabel("Очки: 0");
+        opponentSiegeScoreLabel = new JLabel("Очки: 0");
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -98,10 +111,20 @@ public class GameFieldView extends JFrame {
         setVisible(true);
     }
 
+    public void updateRowScores(int playerMeleeScore, int playerRangedScore, int playerSiegeScore, int opponentMeleeScore, int opponentRangedScore, int opponentSiegeScore) {
+        playerMeleeScoreLabel.setText("Очки: " + playerMeleeScore);
+        playerRangedScoreLabel.setText("Очки: " + playerRangedScore);
+        playerSiegeScoreLabel.setText("Очки: " + playerSiegeScore);
+
+        opponentMeleeScoreLabel.setText("Очки: " + opponentMeleeScore);
+        opponentRangedScoreLabel.setText("Очки: " + opponentRangedScore);
+        opponentSiegeScoreLabel.setText("Очки: " + opponentSiegeScore);
+    }
+
     public void moveToDiscardPile(List<Card> cards) {
         for (Card card : cards) {
             ImageIcon originalIcon = new ImageIcon(card.getPath());
-            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 110, Image.SCALE_SMOOTH);
             ImageIcon resizedIcon = new ImageIcon(scaledImage);
     
             JLabel cardLabel = new JLabel(resizedIcon);
@@ -120,25 +143,26 @@ public class GameFieldView extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridy = 0;
-        panel.add(createCardRow("Рукопашный бой"), gbc);
+        panel.add(createCardRow("Рукопашный бой", title.equals("Ваше поле") ? playerMeleeScoreLabel : opponentMeleeScoreLabel), gbc);
         gbc.gridy = 1;
-        panel.add(createCardRow("Средний бой"), gbc);
+        panel.add(createCardRow("Средний бой", title.equals("Ваше поле") ? playerRangedScoreLabel : opponentRangedScoreLabel), gbc);
         gbc.gridy = 2;
-        panel.add(createCardRow("Осада"), gbc);
+        panel.add(createCardRow("Осада", title.equals("Ваше поле") ? playerSiegeScoreLabel : opponentSiegeScoreLabel), gbc);
+
 
         return panel;
     }
 
-    private JPanel createCardRow(String name) {
+    private JPanel createCardRow(String name, JLabel scoreLabel) {
         JPanel rowPanel = new JPanel(new BorderLayout());
         rowPanel.setOpaque(false);
         JLabel rowLabel = new JLabel(name);
         rowPanel.add(rowLabel, BorderLayout.WEST);
     
-        JPanel cardSlots = new JPanel(new GridLayout(1, 8, 5, 5)); // 8 slots per row
-        cardSlots.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Optional for clarity
+        JPanel cardSlots = new JPanel(new GridLayout(1, 8, 5, 5));
+        cardSlots.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         rowPanel.add(cardSlots, BorderLayout.CENTER);
-    
+        rowPanel.add(scoreLabel, BorderLayout.EAST);
         return rowPanel;
     }
     
@@ -152,17 +176,17 @@ public class GameFieldView extends JFrame {
     public void updateHand(List<Card> hand) {
         handPanel.removeAll();
         for (Card card : hand) {
-            // Загружаем оригинальное изображение
+
             ImageIcon originalIcon = new ImageIcon(card.getPath());
             
-            // Масштабируем изображение до 150x75 пикселей
-            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+
+            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 110, Image.SCALE_SMOOTH);
             ImageIcon resizedIcon = new ImageIcon(scaledImage);
     
-            // Создаем кнопку с уменьшенным изображением
+
             JButton cardButton = new JButton(resizedIcon);
-            cardButton.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Рамка для визуального разделения
-            cardButton.addActionListener(e -> selectedCard = card); // Обработчик выбора карты
+            cardButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            cardButton.addActionListener(e -> selectedCard = card);
             handPanel.add(cardButton);
         }
         handPanel.revalidate();
@@ -170,21 +194,18 @@ public class GameFieldView extends JFrame {
     }
 
     public void updateBoard(Player player, Card card) {
-        JPanel targetPanel = player.isOpponent() ? opponentPanel : playerPanel; // Определяем, куда выкладывать карту
-        
-        // Находим нужный ряд в зависимости от типа карты
-        int rowIndex = card.getRowIndex(); // Предполагается, что Card имеет метод getRowIndex()
+        JPanel targetPanel = player.isOpponent() ? opponentPanel : playerPanel;
+
+        int rowIndex = card.getRowIndex();
         JPanel targetRow = (JPanel) ((JPanel) targetPanel.getComponent(rowIndex)).getComponent(1);
     
-        if (targetRow.getComponentCount() < 8) { // Убедимся, что не больше 8 карт
-            // Загружаем и масштабируем изображение карты
+        if (targetRow.getComponentCount() < 8) {
             ImageIcon originalIcon = new ImageIcon(card.getPath());
-            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 110, Image.SCALE_SMOOTH);
             ImageIcon resizedIcon = new ImageIcon(scaledImage);
-    
-            // Создаем метку с уменьшенным изображением
+
             JLabel cardLabel = new JLabel(resizedIcon);
-            cardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Рамка для визуального разделения
+            cardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             targetRow.add(cardLabel);
             targetRow.revalidate();
             targetRow.repaint();
@@ -212,101 +233,88 @@ public class GameFieldView extends JFrame {
     }
 
     public void startNewRound(List<Card> newHand, List<Card> discard) {
-        // Переместить карты из руки в сброс
         moveToDiscardPile(discard);
-        
-        // Очистить доску
+
         clearBoard();
-        
-        // Очистить руку
+
         clearHand();
-        
-        // Обновить руку с новыми картами
+
         updateHand(newHand);
     }
 
     public void setPlayerFractions(String playerFraction, String opponentFraction) {
-        // Устанавливаем подписи для полей
         playerPanel.setBorder(BorderFactory.createTitledBorder("Ваше поле: " + playerFraction));
         opponentPanel.setBorder(BorderFactory.createTitledBorder("Поле противника: " + opponentFraction));
     }
     public void setPlayerLives(String playerFraction, int playerLives, String opponentFraction, int opponentLives) {
-        // Устанавливаем текст для жизней игрока
         playerLivesLabel.setText(playerFraction + ": " + playerLives + " жизни ");
-        // Устанавливаем текст для жизней противника
-        opponentLivesLabel.setText(opponentFraction + ": " + opponentLives + " жизни ");
+        opponentLivesLabel.setText(opponentFraction + ": " + opponentLives + " жизни");
     }
 
-    private JPanel createSidePanel() {
-        JPanel sidePanel = new JPanel(new GridBagLayout());
-        sidePanel.setPreferredSize(new Dimension(200, 900)); // Фиксированная ширина боковой панели
-        sidePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Опциональная рамка
-        sidePanel.setBackground(new Color(245, 245, 245)); // Светло-серый фон панели
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(10, 10, 10, 10); // Отступы между элементами
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        // Верхняя часть — Герб и жизни игрока
-        JPanel playerLivesPanel = new JPanel(new BorderLayout());
-        playerLivesPanel.setOpaque(false);
-
-        JLabel playerFactionIcon = new JLabel(); // Пустая метка для изображения фракции игрока
-        playerFactionIcon.setHorizontalAlignment(SwingConstants.CENTER);
-        playerLivesPanel.add(playerFactionIcon, BorderLayout.NORTH);
-
-        JLabel playerLivesLabel = new JLabel("Жизни: 2"); // Лейбл для отображения жизней игрока
-        playerLivesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        playerLivesPanel.add(playerLivesLabel, BorderLayout.SOUTH);
-        sidePanel.add(playerLivesPanel, gbc);
-
-        // Середина — Пустое поле для погодных карт
-        gbc.gridy++;
-        JPanel weatherPanel = new JPanel();
-        weatherPanel.setPreferredSize(new Dimension(180, 300)); // Размер рамки для погодных карт
-        weatherPanel.setBorder(BorderFactory.createTitledBorder("Погодные карты"));
-        weatherPanel.setOpaque(false);
-        sidePanel.add(weatherPanel, gbc);
-
-        // Нижняя часть — Герб и жизни игрока-противника
-        gbc.gridy++;
-        JPanel opponentLivesPanel = new JPanel(new BorderLayout());
-        opponentLivesPanel.setOpaque(false);
-
-        JLabel opponentFactionIcon = new JLabel(); // Пустая метка для изображения фракции противника
-        opponentFactionIcon.setHorizontalAlignment(SwingConstants.CENTER);
-        opponentLivesPanel.add(opponentFactionIcon, BorderLayout.NORTH);
-
-        JLabel opponentLivesLabel = new JLabel("Жизни: 2"); // Лейбл для отображения жизней противника
-        opponentLivesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        opponentLivesPanel.add(opponentLivesLabel, BorderLayout.SOUTH);
-        sidePanel.add(opponentLivesPanel, gbc);
-
-        // Сохраняем ссылки на компоненты, чтобы можно было их обновлять позднее
-        this.playerLivesLabel = playerLivesLabel;
-        this.opponentLivesLabel = opponentLivesLabel;
-        this.playerFactionIcon = playerFactionIcon;
-        this.opponentFactionIcon = opponentFactionIcon;
-
-        return sidePanel;
-    }
+//    private JPanel createSidePanel() {
+//        JPanel sidePanel = new JPanel(new GridBagLayout());
+//        sidePanel.setPreferredSize(new Dimension(200, 900));
+//        sidePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//        sidePanel.setBackground(new Color(245, 245, 245));
+//
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        gbc.insets = new Insets(10, 10, 10, 10);
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//
+//
+//        JPanel playerLivesPanel = new JPanel(new BorderLayout());
+//        playerLivesPanel.setOpaque(false);
+//
+//        JLabel playerFactionIcon = new JLabel();
+//        playerFactionIcon.setHorizontalAlignment(SwingConstants.CENTER);
+//        playerLivesPanel.add(playerFactionIcon, BorderLayout.NORTH);
+//
+//        JLabel playerLivesLabel = new JLabel("Жизни: 2");
+//        playerLivesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//        playerLivesPanel.add(playerLivesLabel, BorderLayout.SOUTH);
+//        sidePanel.add(playerLivesPanel, gbc);
+//
+//        gbc.gridy++;
+//        JPanel weatherPanel = new JPanel();
+//        weatherPanel.setPreferredSize(new Dimension(180, 300));
+//        weatherPanel.setBorder(BorderFactory.createTitledBorder("Погодные карты"));
+//        weatherPanel.setOpaque(false);
+//        sidePanel.add(weatherPanel, gbc);
+//
+//        gbc.gridy++;
+//        JPanel opponentLivesPanel = new JPanel(new BorderLayout());
+//        opponentLivesPanel.setOpaque(false);
+//
+//        JLabel opponentFactionIcon = new JLabel();
+//        opponentFactionIcon.setHorizontalAlignment(SwingConstants.CENTER);
+//        opponentLivesPanel.add(opponentFactionIcon, BorderLayout.NORTH);
+//
+//        JLabel opponentLivesLabel = new JLabel("Жизни: 2");
+//        opponentLivesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//        opponentLivesPanel.add(opponentLivesLabel, BorderLayout.SOUTH);
+//        sidePanel.add(opponentLivesPanel, gbc);
+//
+//        this.playerLivesLabel = playerLivesLabel;
+//        this.opponentLivesLabel = opponentLivesLabel;
+//        this.playerFactionIcon = playerFactionIcon;
+//        this.opponentFactionIcon = opponentFactionIcon;
+//
+//        return sidePanel;
+//    }
 
     public void updateFactions(String playerFactionIconPath, String opponentFactionIconPath) {
-        // Обновляем изображение для игрока
         ImageIcon playerIcon = new ImageIcon(playerFactionIconPath);
-        Image scaledPlayerIcon = playerIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH); // Масштабируем изображение
+        Image scaledPlayerIcon = playerIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         playerFactionIcon = new JLabel();
         playerFactionIcon.setIcon(new ImageIcon(scaledPlayerIcon));
 
-        // Обновляем изображение для противника
         ImageIcon opponentIcon = new ImageIcon(opponentFactionIconPath);
-        Image scaledOpponentIcon = opponentIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH); // Масштабируем изображение
+        Image scaledOpponentIcon = opponentIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         opponentFactionIcon = new JLabel();
         opponentFactionIcon.setIcon(new ImageIcon(scaledOpponentIcon));
 
-        // Перерисовываем боковую панель, чтобы изменения отображались
         revalidate();
         repaint();
     }
@@ -332,24 +340,24 @@ public class GameFieldView extends JFrame {
     }
 
     public void displayWinner(Player winner) {
-        JOptionPane.showMessageDialog(GameFieldView.this, "Победитель раунда: " + winner.getFraction());
+        JOptionPane.showMessageDialog(this, "Победитель раунда: " + winner.getFraction());
     }
 
     public void displayDraw() {
-        JOptionPane.showMessageDialog(GameFieldView.this, "Ничья!");
+        JOptionPane.showMessageDialog(this, "Ничья!");
     }
 
     public void displayGameOver(Player winner, Map<Integer, Integer> stats) {
-        JOptionPane.showMessageDialog(GameFieldView.this, "Игра завершена! Победитель: " + winner.getFraction());
-        WinScreenView win = new WinScreenView(winner.getFraction(), stats);
+        JOptionPane.showMessageDialog(this, "Игра завершена! Победитель: " + winner.getFraction());
+       // WinScreenView win = new WinScreenView(winner.getFraction(), stats);
     }
 
     public void updatePassStatus(Player currentPlayer) {
-        JOptionPane.showMessageDialog(GameFieldView.this, currentPlayer.getFraction() + " пропустил ход.");
+        JOptionPane.showMessageDialog(this, currentPlayer.getFraction() + " пропустил ход.");
     }
 
     public void updateScores(int playerScore, int opponentScore) {
-        JOptionPane.showMessageDialog(GameFieldView.this, "Очки: Вы - " + playerScore + ", Противник - " + opponentScore);
+        JOptionPane.showMessageDialog(this, "Очки: Вы - " + playerScore + ", Противник - " + opponentScore);
     }
 
     public Card getSelectedCard() {
@@ -365,6 +373,14 @@ public class GameFieldView extends JFrame {
     }
 
     public void addBackToMenuListener(ActionListener listener) {
-        backButton.addActionListener(listener);
+        backButton.addActionListener(e->{
+            dispose();
+            new MainMenuView();
+
+            if (listener != null) {
+                listener.actionPerformed(e);
+            }
+        });
+
     }
 }

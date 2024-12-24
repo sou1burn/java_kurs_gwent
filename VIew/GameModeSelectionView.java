@@ -20,8 +20,8 @@ public class GameModeSelectionView extends JFrame {
         add(playerVsAIButton);
 
         setSize(500, 250);
-        setLocationRelativeTo(null);  // Центрируем окно на экране
-        setVisible(false); // Сначала окно скрыто
+        setLocationRelativeTo(null);
+        setVisible(false);
     }
 
     public void addPlayerVsPlayerListener(ActionListener listener) {

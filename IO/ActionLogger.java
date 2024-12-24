@@ -2,8 +2,8 @@ package IO;
 import java.util.List;
 
 public class ActionLogger {
-    private PlayerState player1; // Состояние первого игрока
-    private PlayerState player2; // Состояние второго игрока
+    private PlayerState player1;
+    private PlayerState player2;
 
 
     public ActionLogger(PlayerState player1, PlayerState player2) {

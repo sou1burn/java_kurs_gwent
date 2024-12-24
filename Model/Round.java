@@ -47,14 +47,11 @@ public class Round
         fillHand(player2);
 
         if (previousRoundWinner == null) {
-            // Если в предыдущем раунде была ничья, используем стандартное правило
             currentPlayer = (this.roundCount % 2 == 1) ? player1 : player2;
         } else {
-            // Победитель предыдущего раунда начинает
             currentPlayer = previousRoundWinner;
         }
 
-        // Обновляем статусы противников
         player1.setOppStatus(currentPlayer == player2);
         player2.setOppStatus(currentPlayer == player1);
     }
@@ -97,31 +94,26 @@ public class Round
                 String fr2 = p2.getFraction();
                 if (fr1.equals(fr2) && !fr1.equals("Nilfgaard"))
                 {
-                    // Если одинаковая фракция и это не Nilfgaard, оба проигрывают
                     p1.roundLost();
                     p2.roundLost();
                     return null; 
                 } 
                 else if (!fr1.equals("Nilfgaard") && fr2.equals("Nilfgaard")) 
                 {
-                    // Если второй игрок Nilfgaard, он выигрывает
                     return p2;
                 } 
                 else if (fr1.equals("Nilfgaard") && !fr2.equals("Nilfgaard")) 
                 {
-                    // Если первый игрок Nilfgaard, он выигрывает
                     return p1;
                 } 
                 else 
                 {
-                    // Оба Nilfgaard
                     p1.roundLost();
                     p2.roundLost();
-                    return null; // Ничья
+                    return null;
                 }
             }
         }
-
         return null;
     }
 

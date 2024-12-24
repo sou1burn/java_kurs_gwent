@@ -11,7 +11,7 @@ public class MenuController {
     private GameFieldView gameFieldView;
     private GameController gameController;
     private Deck deck1, deck2;
-    private String selectedDeck1, selectedDeck2;  // Новые переменные для хранения выбранных колод
+    private String selectedDeck1, selectedDeck2;
 
     public MenuController(MainMenuView mainMenu, Deck nilfs, Deck sever) {
         this.mainMenu = mainMenu;
@@ -22,7 +22,6 @@ public class MenuController {
         this.selectedDeck1 = null;
         this.selectedDeck2 = null;
 
-        // Слушатели для кнопок в главном меню
         mainMenu.addStartListener(e -> openGameModeSelection());
         mainMenu.addChangeDeckListener(e -> openChangeDeckView());
         mainMenu.addHelpListener(e -> showHelp());
@@ -30,26 +29,23 @@ public class MenuController {
     }
 
     private void startGame(String mode) {
-        // Проверяем, выбрал ли пользователь колоды для обоих игроков
         if (selectedDeck1 == null) {
             JOptionPane.showMessageDialog(mainMenu, "Не выбрана колода для игрока!");
             return;
         }
 
-        gameModeSelectionView.dispose(); // Закрываем окно выбора режима
-        gameFieldView = new GameFieldView(); // Создаем окно игрового поля
+        gameModeSelectionView.dispose();
+        gameFieldView = new GameFieldView();
 
-        // Передаем выбранные колоды в контроллер игры
         Deck playerDeck1 = selectedDeck1.equals("Королевства Севера") ? deck2 : deck1;
         Deck playerDeck2 = selectedDeck2.equals("Нильфгаард") ? deck1 : deck2;
         gameController = new GameController(gameFieldView, mode, playerDeck1, playerDeck2);
-        mainMenu.setVisible(false);
+       // mainMenu.setVisible(false);
     }
 
     private void openGameModeSelection() {
         gameModeSelectionView.setVisible(true);
 
-        // Добавляем слушателей для выбора режима игры
         gameModeSelectionView.addPlayerVsPlayerListener(e -> startGame("PvP"));
         gameModeSelectionView.addPlayerVsAIListener(e -> startGame("PvAI"));
     }
@@ -57,28 +53,24 @@ public class MenuController {
     private void openChangeDeckView() {
         changeDeckView.setVisible(true);
 
-        // Обработчики для выбора колоды
         changeDeckView.addNorthernKingdomListener(e -> selectDeck("Королевства Севера"));
         changeDeckView.addNilfgaardListener(e -> selectDeck("Нильфгаард"));
     }
 
-    // Метод для выбора колоды для игрока 1
     private void selectDeck(String deckName) {
-        // Устанавливаем колоду для игрока 1
         selectedDeck1 = deckName;
-        mainMenu.updateCurrentDeck(deckName); // Обновляем текущую колоду для игрока 1
+        mainMenu.updateCurrentDeck(deckName);
 
-        // Автоматически назначаем колоду для игрока 2
         if (deckName.equals("Королевства Севера")) {
             selectedDeck2 = "Нильфгаард";
         } else {
             selectedDeck2 = "Королевства Севера";
         }
 
-        changeDeckView.setVisible(false); // Закрываем окно выбора колоды
+        changeDeckView.setVisible(false);
     }
 
     private void showHelp() {
-        new HelpView(); // Открытие окна помощи
+        new HelpView();
     }
 }

@@ -21,7 +21,7 @@ public class Player {
     public Player(String fraction, List<Card> deck, boolean isOpponent) {
         this.fraction = fraction;
         this.deck = deck;
-        this.isOpponent = isOpponent; // Устанавливаем значение
+        this.isOpponent = isOpponent;
         this.meleeScore = 0;
         this.midScore = 0;
         this.longRangeScore = 0;
@@ -119,12 +119,11 @@ public class Player {
         this.deck.addAll(this.hand);
         this.hand.clear();
 
-        // Перемешиваем колоду
         Collections.shuffle(this.deck);
     }
     
     public void drawNewHand() {
-        for (int i = 0; i < HAND_SIZE; i++) { // Раздаем начальную руку
+        for (int i = 0; i < HAND_SIZE; i++) {
             if (!deck.isEmpty()) {
                 hand.add(deck.get(i));
             }
@@ -141,10 +140,34 @@ public class Player {
     private Card drawCardFromDeck() {
         if (!deck.isEmpty()) {
             Random random = new Random();
-            return deck.remove(random.nextInt(deck.size())); // Удаляем и возвращаем первую карту из колоды
+            return deck.remove(random.nextInt(deck.size()));
         } else {
             throw new IllegalStateException("Колода пуста, невозможно взять карту!");
         }
     }
-    
+
+    public void updateRowScore(Card card) {
+        switch (card.getRowIndex()) {
+            case 0:
+                meleeScore += card.getPower();
+                break;
+            case 1:
+                midScore += card.getPower();
+                break;
+            case 2:
+                longRangeScore += card.getPower();
+                break;
+            default:
+                throw new IllegalArgumentException("Некорректный ряд для карты: " + card.getRowIndex());
+        }
+
+        totalScore = meleeScore + midScore + longRangeScore;
+    }
+
+    public void clearRowsPower(){
+        this.meleeScore = 0;
+        this.midScore = 0;
+        this.longRangeScore = 0;
+        this.totalScore = 0;
+    }
 }

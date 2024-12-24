@@ -77,7 +77,7 @@ public class Card implements Serializable {
     @Override 
     public String toString()
     {
-        return String.format("Card{name='%s', power=%d, type='%s', description = '%s''}", name, power, type);
+        return String.format("Card{name='%s', power=%d, type='%s'}", name, power, type);
     }
 
     public int getRowIndex()

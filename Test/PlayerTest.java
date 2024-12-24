@@ -57,4 +57,46 @@ public class PlayerTest {
             assertEquals(10, player.getHand().size(), "Hand should be filled up to 10 cards");
             assertEquals(5, player.getDeckSize(), "Deck size should decrease when filling hand");
         }
+
+        @Test
+        public void testUpdateRowScore() {
+            List<Card> deck = new ArrayList<>();
+            Player player = new Player("Northern Realms", deck, false);
+
+            Card meleeCard = new Card(10, "melee", "Geralt", "path/to/image");
+            Card midCard = new Card(5, "mid", "Mage", "path/to/image");
+
+            player.updateRowScore(meleeCard);
+            player.updateRowScore(midCard);
+
+            assertEquals(10, player.getMeleeScore());
+            assertEquals(5, player.getMidScore());
+            assertEquals(15, player.getScore());
+        }
+        @Test
+        public void testRoundLostAndHealth() {
+            List<Card> deck = new ArrayList<>();
+            Player player = new Player("Monsters", deck, true);
+
+            player.roundLost();
+            assertEquals(1, player.getHealth());
+
+            player.roundLost();
+            assertEquals(0, player.getHealth());
+        }
+
+        @Test
+        public void testAddAndRemoveCardFromHand() {
+            List<Card> deck = new ArrayList<>();
+            Player player = new Player("Scoia'tael", deck, false);
+
+            Card card = new Card(5, "melee", "Geralt", "path/to/image");
+            player.addCardToHand(card);
+
+            assertEquals(1, player.getHand().size());
+            assertEquals(card, player.getHand().get(0));
+
+            player.removeCardFromHand(card);
+            assertTrue(player.getHand().isEmpty());
     }
+}

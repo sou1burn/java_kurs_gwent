@@ -15,7 +15,6 @@ public class ChangeDeckView extends JFrame {
         setSize(600, 300);
         setLocationRelativeTo(null);
 
-        // Панель с кнопками выбора колоды
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
 

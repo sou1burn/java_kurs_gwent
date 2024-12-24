@@ -75,14 +75,11 @@ public class Deck
     @JsonIgnore
     public Deck resize() {
         for (Card card : cards) {
-            ImageIcon originalIcon = new ImageIcon(card.getPath()); // Загружаем изображение
-            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 120, Image.SCALE_SMOOTH); // Масштабируем
-            ImageIcon resizedIcon = new ImageIcon(scaledImage); // Создаем новый ImageIcon
-            card.setImage(resizedIcon); // Устанавливаем иконку карте
+            ImageIcon originalIcon = new ImageIcon(card.getPath());
+            Image scaledImage = originalIcon.getImage().getScaledInstance(100, 110, Image.SCALE_SMOOTH);
+            ImageIcon resizedIcon = new ImageIcon(scaledImage);
+            card.setImage(resizedIcon);
         }
-        return this; // Возвращаем обновленную колоду
+        return this;
     }
-
-
-
 }

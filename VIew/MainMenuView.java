@@ -17,7 +17,6 @@ public class MainMenuView extends JFrame {
         setSize(700, 500);
         setLocationRelativeTo(null);
 
-        // Панель с кнопками
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(4, 1, 10, 10)); // 4 строки, 1 столбец
 
@@ -31,7 +30,6 @@ public class MainMenuView extends JFrame {
         buttonPanel.add(helpButton);
         buttonPanel.add(quitButton);
 
-        // Панель с информацией о текущей колоде
         JPanel deckPanel = new JPanel();
         deckPanel.setLayout(new BorderLayout());
         currentDeckLabel = new JLabel("Текущая колода: Не выбрана", SwingConstants.CENTER);
@@ -46,7 +44,7 @@ public class MainMenuView extends JFrame {
         add(splitPane, BorderLayout.CENTER);
     }
 
-    // Методы для добавления слушателей кнопок
+
     public void addStartListener(ActionListener listener) {
         startButton.addActionListener(listener);
     }
@@ -63,7 +61,6 @@ public class MainMenuView extends JFrame {
         quitButton.addActionListener(listener);
     }
 
-    // Метод для обновления текущей колоды
     public void updateCurrentDeck(String deckName) {
         currentDeckLabel.setText("Текущая колода: " + deckName);
     }

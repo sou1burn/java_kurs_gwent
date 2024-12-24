@@ -63,29 +63,28 @@ public class GameController {
             return;
         }
     
-        Card playedCard = gameFieldView.getSelectedCard(); // Выбранная карта
+        Card playedCard = gameFieldView.getSelectedCard();
     
         if (playedCard != null && currentPlayer.getHand().contains(playedCard)) {
-            round.throwCard(currentPlayer, playedCard); // Карта отправляется на игровое поле
-            gameFieldView.updateBoard(currentPlayer, playedCard); // Обновляем игровое поле
-    
-            // Добавляем очки в текущий раунд
+            round.throwCard(currentPlayer, playedCard);
+            gameFieldView.updateBoard(currentPlayer, playedCard);
+
             if (currentPlayer.equals(p1)) {
                 p1RoundScore += playedCard.getPower();
             } else {
                 p2RoundScore += playedCard.getPower();
             }
-    
+            currentPlayer.updateRowScore(playedCard);
+            gameFieldView.updateRowScores(p1.getMeleeScore(), p1.getMidScore(), p1.getLongRangeScore(), p2.getMeleeScore(), p2.getMidScore(), p2.getLongRangeScore());
             gameFieldView.updateScores(p1RoundScore, p2RoundScore);
-    
-            // Удаляем карту из руки и обновляем интерфейс
+
             gameFieldView.updateHand(currentPlayer.getHand());
             logRoundState();
-            // Если оба игрока спасовали или карты кончились, завершить раунд
+
             if (checkRoundEnd()) {
                 determineWinner();
             } else if (!round.getOpponent().getState()) {
-                round.nextTurn(); // Передать ход, только если второй игрок не спасовал
+                round.nextTurn();
                 gameFieldView.updateHand(round.getCurrentPlayer().getHand());
             }
         } else {
@@ -96,14 +95,14 @@ public class GameController {
 
     private void passTurn() {
         Player currentPlayer = round.getCurrentPlayer();
-        currentPlayer.setState(true); // Игрок нажал "Пас"
+        currentPlayer.setState(true);
         gameFieldView.updatePassStatus(currentPlayer);
         logRoundState();
-        // Если оба игрока пасовали или у них нет карт, завершить раунд
+
         if (p1.getState() && p2.getState() || (p1.getHand().isEmpty() && p2.getHand().isEmpty())) {
             determineWinner();
         } else {
-            round.nextTurn(); // Передаём ход другому игроку
+            round.nextTurn();
             gameFieldView.updateHand(round.getCurrentPlayer().getHand());
         }
     }
@@ -111,29 +110,36 @@ public class GameController {
 
     private boolean checkRoundEnd() {
         logRoundState();
-        // Раунд завершается, если оба игрока нажали "Пас" или у обоих закончились карты
+
         return (p1.getState() && p2.getState()) || (p1.getHand().isEmpty() && p2.getHand().isEmpty());
     }
 
     private void determineWinner() {
-        // Сравниваем очки текущего раунда
-        if (p1RoundScore > p2RoundScore && !p1.getFraction().equals(p2.getFraction()) && !p1.getFraction().equals("Nilfgaard") && !p2.getFraction().equals("Nilfgaard")) {
+
+        if (p1RoundScore > p2RoundScore) {
             gameFieldView.displayWinner(p1);
             p2.roundLost();
-        } else if (p2RoundScore > p1RoundScore && !p1.getFraction().equals(p2.getFraction()) && !p1.getFraction().equals("Nilfgaard") && !p2.getFraction().equals("Nilfgaard")) {
+        } else if (p2RoundScore > p1RoundScore) {
             gameFieldView.displayWinner(p2);
             p1.roundLost();
-        } else {
-            gameFieldView.displayDraw();
+        } else if (p2RoundScore == p1RoundScore && p1.getFraction().equals("Нильфгаард") && !p2.getFraction().equals("Нильфгаард")){
+            p2.roundLost();
+            gameFieldView.displayWinner(p1);
+        } else if (p2RoundScore == p1RoundScore && !p1.getFraction().equals("Нильфгаард") && p2.getFraction().equals("Нильфгаард")){
+            p1.roundLost();
+            gameFieldView.displayWinner(p2);
+        } else if (p1RoundScore == p2RoundScore && p1.getFraction().equals("Нильфгаард") && p2.getFraction().equals("Нильфгаард")){
             p1.roundLost();
             p2.roundLost();
+            gameFieldView.displayDraw();
         }
+
         this.roundStats.put(p1RoundScore, p2RoundScore);
-        // Обновляем общий счёт
+
         p1.addPoints(p1RoundScore);
         p2.addPoints(p2RoundScore);
         logRoundState();
-        // Проверяем завершение игры
+
         if (p1.getHealth() <= 0 || p2.getHealth() <= 0) {
             gameOver();
         } else {
@@ -143,13 +149,12 @@ public class GameController {
 
     private void startNewRound() {
         if (p1.getDeckSize() == 0 || p2.getDeckSize() == 0) {
-            gameOver(); // Игра завершена, если у кого-то нет карт в колоде
+            gameOver();
             return;
         }
 
         this.roundCount++;
 
-        // Определяем победителя предыдущего раунда
         Player lastRoundWinner = null;
         if (p1RoundScore > p2RoundScore) {
             lastRoundWinner = p1;
@@ -157,28 +162,26 @@ public class GameController {
             lastRoundWinner = p2;
         }
 
-        // Возвращаем карты из рук игроков в их колоды и перемешиваем
         p1.clearHand();
         p2.clearHand();
 
-        // Создаем новый раунд
         round = new Round(p1, p2, roundCount);
-        round.start(lastRoundWinner); // Передаем победителя
+        round.start(lastRoundWinner);
         gameFieldView.setPlayerLives(deck1.getFraction(), p1.getHealth(), deck2.getFraction(), p2.getHealth());
         gameFieldView.clearBoard();
         gameFieldView.clearHand();
         p1.setState(false);
         p2.setState(false);
 
-        // Снова заполняем руку из колоды до 10 карт
         p1.fillHandTo(10);
         p2.fillHandTo(10);
 
-        // Сбрасываем очки текущего раунда
+        p1.clearRowsPower();
+        p2.clearRowsPower();
         p1RoundScore = 0;
         p2RoundScore = 0;
 
-        // Обновляем интерфейс для правильного текущего игрока
+        gameFieldView.updateRowScores(p1.getMeleeScore(), p1.getMidScore(), p1.getLongRangeScore(), p2.getMeleeScore(), p2.getMidScore(), p2.getLongRangeScore());
         gameFieldView.updateHand(round.getCurrentPlayer().getHand());
         gameFieldView.updateDeckCount(p1.getDeckSize(), p2.getDeckSize());
         gameFieldView.updateScores(p1RoundScore, p2RoundScore);
@@ -187,7 +190,8 @@ public class GameController {
     
 
     private void backToMenu() {
-        gameFieldView.dispose();
+        //gameFieldView.dispose();
+        gameFieldView.addBackToMenuListener(null);
     }
 
     private void gameOver() {
@@ -252,7 +256,6 @@ public class GameController {
                 )
         );
 
-        // Сохраняем состояние раунда
         gameLogs.put("round" + roundCount, log);
     }
 }

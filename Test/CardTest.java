@@ -26,4 +26,17 @@ public class CardTest {
         Card rangeCard = new Card(5, "range", "Range Card", "path");
         assertEquals(2, rangeCard.getRowIndex(), "Range card should have row index 2");
     }
+
+    @Test
+    public void testSetters() {
+        Card card = new Card(7, "long", "Dandelion", "path/to/image");
+
+        card.setPower(9);
+        card.setType("melee");
+        card.setName("Ciri");
+
+        assertEquals(9, card.getPower());
+        assertEquals("melee", card.getType());
+        assertEquals("Ciri", card.getName());
+    }
 }
