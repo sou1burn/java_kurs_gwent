@@ -25,7 +25,7 @@ public class Main {
         nilfs.addCard(new Card(5, "mid", "Ренуальд аэп Матсен", "src/nilfs/renuald.png"));
         nilfs.addCard(new Card(6, "longRange", "Сапер", "src/nilfs/saper.png"));
         nilfs.addCard(new Card(2, "mid", "Свирс", "src/nilfs/svirs.png"));
-        nilfs.addCard(new Card(10, "melee", "Тибор Эггебархт", "src/nilfs/tibor.png"));
+        nilfs.addCard(new Card(10, "mid", "Тибор Эггебархт", "src/nilfs/tibor.png"));
         nilfs.addCard(new Card(7, "melee", "Трисс Меригольд", "src/nilfs/triss.png"));
         nilfs.addCard(new Card(4, "mid", "Вангемар", "src/nilfs/vangemar.png"));
         nilfs.addCard(new Card(6, "melee", "Весимир", "src/nilfs/vesemir.png"));

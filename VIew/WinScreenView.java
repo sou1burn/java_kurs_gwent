@@ -25,16 +25,20 @@ public class WinScreenView extends JFrame {
 
         StringBuilder statsBuilder = new StringBuilder();
         statsBuilder.append("Результаты по раундам:\n");
-        AtomicInteger roundNumber = new AtomicInteger(1);
-        roundStats.entrySet().stream()
-                .sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey())) // Сортировка в обратном порядке по ключу
-                .forEachOrdered(entry -> {
-                    statsBuilder.append("Раунд ").append(roundNumber.get()).append(": ")
-                            .append("Игрок 1: ").append(entry.getKey()).append(", ")
-                            .append("Игрок 2: ").append(entry.getValue()).append("\n");
-                    roundNumber.getAndIncrement();
-                });
-
+//        AtomicInteger roundNumber = new AtomicInteger(1);
+//        roundStats.entrySet().stream()
+//                .sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey())) // Сортировка в обратном порядке по ключу
+//                .forEachOrdered(entry -> {
+//                    statsBuilder.append("Раунд ").append(roundNumber.get()).append(": ")
+//                            .append("Игрок 1: ").append(entry.getKey()).append(", ")
+//                            .append("Игрок 2: ").append(entry.getValue()).append("\n");
+//                    roundNumber.getAndIncrement();
+//                });
+        int roundNumber = 1;
+        for (Map.Entry<Integer, Integer> entry : roundStats.entrySet()) {
+            statsBuilder.append("Раунд: ").append(roundNumber).append(": ").append("Игрок 1: ").append(entry.getKey()).append("Игрок 2: ").append(entry.getValue()).append("\n");
+            roundNumber++;
+        }
         roundStatsArea = new JTextArea(statsBuilder.toString());
         roundStatsArea.setEditable(false);
         roundStatsArea.setLineWrap(true);

@@ -2,27 +2,6 @@
   "round1" : {
     "player1" : {
       "playedCards" : [ {
-        "power" : 5,
-        "type" : "mid",
-        "name" : "Кейра Мец",
-        "path" : "src/sever/keira.png",
-        "rowIndex" : 1
-      } ],
-      "score" : 5,
-      "state" : "passed",
-      "hand" : [ {
-        "power" : 15,
-        "type" : "melee",
-        "name" : "Геральт из Ривии",
-        "path" : "src/sever/geralt.png",
-        "rowIndex" : 0
-      }, {
-        "power" : 5,
-        "type" : "mid",
-        "name" : "Рубайлы из Кринфрида",
-        "path" : "src/sever/rubail.png",
-        "rowIndex" : 1
-      }, {
         "power" : 10,
         "type" : "mid",
         "name" : "Филиппа Эйльхарт",
@@ -31,8 +10,26 @@
       }, {
         "power" : 10,
         "type" : "melee",
-        "name" : "Ян Наталис",
-        "path" : "src/sever/natalis.png",
+        "name" : "Эстерад Тиссен",
+        "path" : "src/sever/esterad.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Требушет",
+        "path" : "src/sever/trebushet.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Баллиста",
+        "path" : "src/sever/ballista.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 1,
+        "type" : "melee",
+        "name" : "Реданский пехотинец",
+        "path" : "src/sever/pexota.png",
         "rowIndex" : 0
       }, {
         "power" : 5,
@@ -42,16 +39,10 @@
         "rowIndex" : 0
       }, {
         "power" : 6,
-        "type" : "longRange",
-        "name" : "Осадная башня",
-        "path" : "src/sever/siegeTower.png",
-        "rowIndex" : 2
-      }, {
-        "power" : 5,
-        "type" : "melee",
-        "name" : "Эмиель Регис",
-        "path" : "src/sever/regis.png",
-        "rowIndex" : 0
+        "type" : "mid",
+        "name" : "Детмольд",
+        "path" : "src/sever/detmold.png",
+        "rowIndex" : 1
       }, {
         "power" : 7,
         "type" : "melee",
@@ -60,57 +51,99 @@
         "rowIndex" : 0
       }, {
         "power" : 6,
-        "type" : "longRange",
-        "name" : "Требушет",
-        "path" : "src/sever/trebushet.png",
-        "rowIndex" : 2
+        "type" : "melee",
+        "name" : "Весимир",
+        "path" : "src/nilfs/vesemir.png",
+        "rowIndex" : 0
       }, {
         "power" : 10,
         "type" : "melee",
         "name" : "Вернон Роше",
         "path" : "src/sever/vernon.png",
         "rowIndex" : 0
+      }, {
+        "power" : 15,
+        "type" : "melee",
+        "name" : "Геральт из Ривии",
+        "path" : "src/sever/geralt.png",
+        "rowIndex" : 0
+      } ],
+      "score" : 67,
+      "state" : "active",
+      "hand" : [ {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Осадная башня",
+        "path" : "src/sever/siegeTower.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Шеала де Тансервилль",
+        "path" : "src/sever/sheala.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Золтан Хивай",
+        "path" : "src/nilfs/zoltan.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 15,
+        "type" : "melee",
+        "name" : "Цирилла",
+        "path" : "src/nilfs/ziri.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 2,
+        "type" : "melee",
+        "name" : "Ярпен Зигрин",
+        "path" : "src/sever/yarpen.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Зигфрид из Денесле",
+        "path" : "src/sever/zigfrid.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Рубайлы из Кринфрида",
+        "path" : "src/sever/rubail.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Кейра Мец",
+        "path" : "src/sever/keira.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Эмиель Регис",
+        "path" : "src/sever/regis.png",
+        "rowIndex" : 0
       } ]
     },
     "player2" : {
       "playedCards" : [ {
-        "power" : 5,
+        "power" : 2,
         "type" : "mid",
-        "name" : "Ренуальд аэп Матсен",
-        "path" : "src/nilfs/renuald.png",
+        "name" : "Альбрых",
+        "path" : "src/nilfs/albrix.png",
         "rowIndex" : 1
-      } ],
-      "score" : 5,
-      "state" : "passed",
-      "hand" : [ {
-        "power" : 15,
-        "type" : "melee",
-        "name" : "Геральт из Ривии",
-        "path" : "src/nilfs/geralt.png",
-        "rowIndex" : 0
-      }, {
-        "power" : 5,
-        "type" : "longRange",
-        "name" : "Огненный скорпион",
-        "path" : "src/nilfs/firescorp.png",
-        "rowIndex" : 2
-      }, {
-        "power" : 4,
-        "type" : "melee",
-        "name" : "Раинфарн",
-        "path" : "src/nilfs/rainfarn.png",
-        "rowIndex" : 0
       }, {
         "power" : 6,
-        "type" : "mid",
-        "name" : "Фрингилья де Виго",
-        "path" : "src/nilfs/fringilia.png",
-        "rowIndex" : 1
-      }, {
-        "power" : 10,
         "type" : "melee",
-        "name" : "Лето из Гулеты",
-        "path" : "src/nilfs/leto.png",
+        "name" : "Кагыр",
+        "path" : "src/nilfs/kagir.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 2,
+        "type" : "melee",
+        "name" : "Вреемде",
+        "path" : "src/nilfs/vreemde.png",
         "rowIndex" : 0
       }, {
         "power" : 4,
@@ -119,16 +152,67 @@
         "path" : "src/nilfs/zintia.png",
         "rowIndex" : 1
       }, {
+        "power" : 6,
+        "type" : "melee",
+        "name" : "Весимир",
+        "path" : "src/nilfs/vesemir.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 4,
+        "type" : "melee",
+        "name" : "Раинфарн",
+        "path" : "src/nilfs/rainfarn.png",
+        "rowIndex" : 0
+      }, {
         "power" : 15,
         "type" : "melee",
-        "name" : "Цирилла",
-        "path" : "src/nilfs/ziri.png",
+        "name" : "Геральт из Ривии",
+        "path" : "src/nilfs/geralt.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Сапер",
+        "path" : "src/nilfs/saper.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 7,
+        "type" : "melee",
+        "name" : "Трисс Меригольд",
+        "path" : "src/nilfs/triss.png",
         "rowIndex" : 0
       }, {
         "power" : 10,
+        "type" : "mid",
+        "name" : "Лучний Бурой Хоругви",
+        "path" : "src/nilfs/luchnik.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Ренуальд аэп Матсен",
+        "path" : "src/nilfs/renuald.png",
+        "rowIndex" : 1
+      } ],
+      "score" : 62,
+      "state" : "active",
+      "hand" : [ {
+        "power" : 5,
         "type" : "melee",
-        "name" : "Тибор Эггебархт",
-        "path" : "src/nilfs/tibor.png",
+        "name" : "Золтан Хивай",
+        "path" : "src/nilfs/zoltan.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 10,
+        "type" : "longRange",
+        "name" : "Морвран Воорхис",
+        "path" : "src/nilfs/voorxis.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 3,
+        "type" : "melee",
+        "name" : "Мортейзен",
+        "path" : "src/nilfs/morteizen.png",
         "rowIndex" : 0
       }, {
         "power" : 6,
@@ -137,10 +221,34 @@
         "path" : "src/nilfs/assire.png",
         "rowIndex" : 1
       }, {
-        "power" : 2,
+        "power" : 10,
         "type" : "mid",
-        "name" : "Альбрых",
-        "path" : "src/nilfs/albrix.png",
+        "name" : "Тибор Эггебархт",
+        "path" : "src/nilfs/tibor.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Эмиель Регис",
+        "path" : "src/nilfs/regis.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 10,
+        "type" : "melee",
+        "name" : "Лето из Гулеты",
+        "path" : "src/nilfs/leto.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 6,
+        "type" : "mid",
+        "name" : "Фрингилья де Виго",
+        "path" : "src/nilfs/fringilia.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 3,
+        "type" : "mid",
+        "name" : "Путткамер",
+        "path" : "src/nilfs/puttkamer.png",
         "rowIndex" : 1
       } ]
     }
@@ -148,27 +256,6 @@
   "round2" : {
     "player1" : {
       "playedCards" : [ {
-        "power" : 5,
-        "type" : "mid",
-        "name" : "Кейра Мец",
-        "path" : "src/sever/keira.png",
-        "rowIndex" : 1
-      } ],
-      "score" : 0,
-      "state" : "passed",
-      "hand" : [ {
-        "power" : 15,
-        "type" : "melee",
-        "name" : "Геральт из Ривии",
-        "path" : "src/sever/geralt.png",
-        "rowIndex" : 0
-      }, {
-        "power" : 5,
-        "type" : "mid",
-        "name" : "Рубайлы из Кринфрида",
-        "path" : "src/sever/rubail.png",
-        "rowIndex" : 1
-      }, {
         "power" : 10,
         "type" : "mid",
         "name" : "Филиппа Эйльхарт",
@@ -177,8 +264,26 @@
       }, {
         "power" : 10,
         "type" : "melee",
-        "name" : "Ян Наталис",
-        "path" : "src/sever/natalis.png",
+        "name" : "Эстерад Тиссен",
+        "path" : "src/sever/esterad.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Требушет",
+        "path" : "src/sever/trebushet.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Баллиста",
+        "path" : "src/sever/ballista.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 1,
+        "type" : "melee",
+        "name" : "Реданский пехотинец",
+        "path" : "src/sever/pexota.png",
         "rowIndex" : 0
       }, {
         "power" : 5,
@@ -188,16 +293,10 @@
         "rowIndex" : 0
       }, {
         "power" : 6,
-        "type" : "longRange",
-        "name" : "Осадная башня",
-        "path" : "src/sever/siegeTower.png",
-        "rowIndex" : 2
-      }, {
-        "power" : 5,
-        "type" : "melee",
-        "name" : "Эмиель Регис",
-        "path" : "src/sever/regis.png",
-        "rowIndex" : 0
+        "type" : "mid",
+        "name" : "Детмольд",
+        "path" : "src/sever/detmold.png",
+        "rowIndex" : 1
       }, {
         "power" : 7,
         "type" : "melee",
@@ -206,57 +305,99 @@
         "rowIndex" : 0
       }, {
         "power" : 6,
-        "type" : "longRange",
-        "name" : "Требушет",
-        "path" : "src/sever/trebushet.png",
-        "rowIndex" : 2
+        "type" : "melee",
+        "name" : "Весимир",
+        "path" : "src/nilfs/vesemir.png",
+        "rowIndex" : 0
       }, {
         "power" : 10,
         "type" : "melee",
         "name" : "Вернон Роше",
         "path" : "src/sever/vernon.png",
         "rowIndex" : 0
+      }, {
+        "power" : 15,
+        "type" : "melee",
+        "name" : "Геральт из Ривии",
+        "path" : "src/sever/geralt.png",
+        "rowIndex" : 0
+      } ],
+      "score" : 15,
+      "state" : "passed",
+      "hand" : [ {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Осадная башня",
+        "path" : "src/sever/siegeTower.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Шеала де Тансервилль",
+        "path" : "src/sever/sheala.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Золтан Хивай",
+        "path" : "src/nilfs/zoltan.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 15,
+        "type" : "melee",
+        "name" : "Цирилла",
+        "path" : "src/nilfs/ziri.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 2,
+        "type" : "melee",
+        "name" : "Ярпен Зигрин",
+        "path" : "src/sever/yarpen.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Зигфрид из Денесле",
+        "path" : "src/sever/zigfrid.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Рубайлы из Кринфрида",
+        "path" : "src/sever/rubail.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Кейра Мец",
+        "path" : "src/sever/keira.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Эмиель Регис",
+        "path" : "src/sever/regis.png",
+        "rowIndex" : 0
       } ]
     },
     "player2" : {
       "playedCards" : [ {
-        "power" : 5,
+        "power" : 2,
         "type" : "mid",
-        "name" : "Ренуальд аэп Матсен",
-        "path" : "src/nilfs/renuald.png",
+        "name" : "Альбрых",
+        "path" : "src/nilfs/albrix.png",
         "rowIndex" : 1
-      } ],
-      "score" : 0,
-      "state" : "passed",
-      "hand" : [ {
-        "power" : 15,
-        "type" : "melee",
-        "name" : "Геральт из Ривии",
-        "path" : "src/nilfs/geralt.png",
-        "rowIndex" : 0
-      }, {
-        "power" : 5,
-        "type" : "longRange",
-        "name" : "Огненный скорпион",
-        "path" : "src/nilfs/firescorp.png",
-        "rowIndex" : 2
-      }, {
-        "power" : 4,
-        "type" : "melee",
-        "name" : "Раинфарн",
-        "path" : "src/nilfs/rainfarn.png",
-        "rowIndex" : 0
       }, {
         "power" : 6,
-        "type" : "mid",
-        "name" : "Фрингилья де Виго",
-        "path" : "src/nilfs/fringilia.png",
-        "rowIndex" : 1
-      }, {
-        "power" : 10,
         "type" : "melee",
-        "name" : "Лето из Гулеты",
-        "path" : "src/nilfs/leto.png",
+        "name" : "Кагыр",
+        "path" : "src/nilfs/kagir.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 2,
+        "type" : "melee",
+        "name" : "Вреемде",
+        "path" : "src/nilfs/vreemde.png",
         "rowIndex" : 0
       }, {
         "power" : 4,
@@ -265,16 +406,67 @@
         "path" : "src/nilfs/zintia.png",
         "rowIndex" : 1
       }, {
+        "power" : 6,
+        "type" : "melee",
+        "name" : "Весимир",
+        "path" : "src/nilfs/vesemir.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 4,
+        "type" : "melee",
+        "name" : "Раинфарн",
+        "path" : "src/nilfs/rainfarn.png",
+        "rowIndex" : 0
+      }, {
         "power" : 15,
         "type" : "melee",
-        "name" : "Цирилла",
-        "path" : "src/nilfs/ziri.png",
+        "name" : "Геральт из Ривии",
+        "path" : "src/nilfs/geralt.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 6,
+        "type" : "longRange",
+        "name" : "Сапер",
+        "path" : "src/nilfs/saper.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 7,
+        "type" : "melee",
+        "name" : "Трисс Меригольд",
+        "path" : "src/nilfs/triss.png",
         "rowIndex" : 0
       }, {
         "power" : 10,
+        "type" : "mid",
+        "name" : "Лучний Бурой Хоругви",
+        "path" : "src/nilfs/luchnik.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "mid",
+        "name" : "Ренуальд аэп Матсен",
+        "path" : "src/nilfs/renuald.png",
+        "rowIndex" : 1
+      } ],
+      "score" : 5,
+      "state" : "passed",
+      "hand" : [ {
+        "power" : 5,
         "type" : "melee",
-        "name" : "Тибор Эггебархт",
-        "path" : "src/nilfs/tibor.png",
+        "name" : "Золтан Хивай",
+        "path" : "src/nilfs/zoltan.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 10,
+        "type" : "longRange",
+        "name" : "Морвран Воорхис",
+        "path" : "src/nilfs/voorxis.png",
+        "rowIndex" : 2
+      }, {
+        "power" : 3,
+        "type" : "melee",
+        "name" : "Мортейзен",
+        "path" : "src/nilfs/morteizen.png",
         "rowIndex" : 0
       }, {
         "power" : 6,
@@ -283,10 +475,34 @@
         "path" : "src/nilfs/assire.png",
         "rowIndex" : 1
       }, {
-        "power" : 2,
+        "power" : 10,
         "type" : "mid",
-        "name" : "Альбрых",
-        "path" : "src/nilfs/albrix.png",
+        "name" : "Тибор Эггебархт",
+        "path" : "src/nilfs/tibor.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 5,
+        "type" : "melee",
+        "name" : "Эмиель Регис",
+        "path" : "src/nilfs/regis.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 10,
+        "type" : "melee",
+        "name" : "Лето из Гулеты",
+        "path" : "src/nilfs/leto.png",
+        "rowIndex" : 0
+      }, {
+        "power" : 6,
+        "type" : "mid",
+        "name" : "Фрингилья де Виго",
+        "path" : "src/nilfs/fringilia.png",
+        "rowIndex" : 1
+      }, {
+        "power" : 3,
+        "type" : "mid",
+        "name" : "Путткамер",
+        "path" : "src/nilfs/puttkamer.png",
         "rowIndex" : 1
       } ]
     }

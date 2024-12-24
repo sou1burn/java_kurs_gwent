@@ -66,7 +66,7 @@ public class GameFieldView extends JFrame {
         scorePanel.add(playerScoreLabel);
         scorePanel.add(opponentScoreLabel);
 
-        gbc.gridy = 5; // Добавляем внизу после кнопок
+        gbc.gridy = 5;
         add(livesPanel, gbc);
         opponentPanel = createBattleField("Поле противника");
         gbc.gridx = 0;
@@ -270,6 +270,7 @@ public class GameFieldView extends JFrame {
         playerPanel.setBorder(BorderFactory.createTitledBorder("Ваше поле: " + playerFraction));
         opponentPanel.setBorder(BorderFactory.createTitledBorder("Поле противника: " + opponentFraction));
     }
+
     public void setPlayerLives(String playerFraction, int playerLives, String opponentFraction, int opponentLives) {
         playerLivesLabel.setText(playerFraction + ": " + playerLives + " жизни ");
         opponentLivesLabel.setText(opponentFraction + ": " + opponentLives + " жизни");
@@ -352,11 +353,6 @@ public class GameFieldView extends JFrame {
     public void updateDeckCount(int playerDeckCount, int opponentDeckCount) {
         playerDeckCountLabel.setText("Ваши карты в колоде: " + playerDeckCount);
         opponentDeckCountLabel.setText("Карты противника в колоде: " + opponentDeckCount);
-    }
-    
-    public void updateLives(int playerLives, int opponentLives) {
-        playerLivesLabel.setText("Ваши жизни: " + playerLives);
-        opponentLivesLabel.setText("Жизни противника: " + opponentLives);
     }
 
     public void updateStatus(String message) {

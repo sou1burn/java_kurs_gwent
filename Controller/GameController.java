@@ -91,7 +91,6 @@ public class GameController {
             JOptionPane.showMessageDialog(gameFieldView,"Выберите доступную карту из руки!");
         }
     }
-    
 
     private void passTurn() {
         Player currentPlayer = round.getCurrentPlayer();
@@ -106,7 +105,6 @@ public class GameController {
             gameFieldView.updateHand(round.getCurrentPlayer().getHand());
         }
     }
-    
 
     private boolean checkRoundEnd() {
         logRoundState();
