@@ -21,12 +21,12 @@ public class GameFieldView extends JFrame {
     private JLabel playerLivesLabel;
     private JLabel opponentLivesLabel;
     private JPanel discardPilePanel;
-    private JLabel statusLabel; // Для сообщений
+    private JLabel statusLabel;
     private JPanel scorePanel;
     private JLabel playerScoreLabel;
     private JLabel opponentScoreLabel;
-    private JLabel playerFactionIcon;
-    private JLabel opponentFactionIcon;
+//    private JLabel playerFactionIcon;
+//    private JLabel opponentFactionIcon;
     private JLabel playerMeleeScoreLabel;
     private JLabel playerRangedScoreLabel;
     private JLabel playerSiegeScoreLabel;
@@ -68,14 +68,14 @@ public class GameFieldView extends JFrame {
 
         gbc.gridy = 5; // Добавляем внизу после кнопок
         add(livesPanel, gbc);
-        opponentPanel = createPlayerPanel("Поле противника");
+        opponentPanel = createBattleField("Поле противника");
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         gbc.weighty = 0.3;
         add(opponentPanel, gbc);
 
-        playerPanel = createPlayerPanel("Ваше поле");
+        playerPanel = createBattleField("Ваше поле");
         gbc.gridy = 1;
         gbc.weighty = 0.3;
         add(playerPanel, gbc);
@@ -165,7 +165,33 @@ public class GameFieldView extends JFrame {
         rowPanel.add(scoreLabel, BorderLayout.EAST);
         return rowPanel;
     }
-    
+
+    private JPanel createBattleField(String playerName) {
+        JPanel battleField = new JPanel(new GridLayout(3, 1, 5, 5));
+        battleField.setBorder(BorderFactory.createTitledBorder("Поле игрока: " + playerName));
+
+        battleField.add(createRow("Рукопашный бой"));
+        battleField.add(createRow("Средний бой"));
+        battleField.add(createRow("Осада"));
+
+        return battleField;
+    }
+
+    private JPanel createRow(String name) {
+        JPanel rowPanel = new JPanel(new BorderLayout());
+
+        JLabel rowLabel = new JLabel(name);
+        rowPanel.add(rowLabel, BorderLayout.WEST);
+
+        JPanel cardSlots = new JPanel(new GridLayout(1, 8, 5, 5));
+        cardSlots.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        rowPanel.add(cardSlots, BorderLayout.CENTER);
+
+        JLabel scoreLabel = new JLabel("Очки: 0");
+        rowPanel.add(scoreLabel, BorderLayout.EAST);
+
+        return rowPanel;
+    }
 
     private JPanel createHandPanel() {
         JPanel panel = new JPanel(new GridLayout(1, 10, 5, 5));
@@ -178,11 +204,9 @@ public class GameFieldView extends JFrame {
         for (Card card : hand) {
 
             ImageIcon originalIcon = new ImageIcon(card.getPath());
-            
 
             Image scaledImage = originalIcon.getImage().getScaledInstance(100, 110, Image.SCALE_SMOOTH);
             ImageIcon resizedIcon = new ImageIcon(scaledImage);
-    
 
             JButton cardButton = new JButton(resizedIcon);
             cardButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -304,20 +328,20 @@ public class GameFieldView extends JFrame {
 //        return sidePanel;
 //    }
 
-    public void updateFactions(String playerFactionIconPath, String opponentFactionIconPath) {
-        ImageIcon playerIcon = new ImageIcon(playerFactionIconPath);
-        Image scaledPlayerIcon = playerIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        playerFactionIcon = new JLabel();
-        playerFactionIcon.setIcon(new ImageIcon(scaledPlayerIcon));
-
-        ImageIcon opponentIcon = new ImageIcon(opponentFactionIconPath);
-        Image scaledOpponentIcon = opponentIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        opponentFactionIcon = new JLabel();
-        opponentFactionIcon.setIcon(new ImageIcon(scaledOpponentIcon));
-
-        revalidate();
-        repaint();
-    }
+//    public void updateFactions(String playerFactionIconPath, String opponentFactionIconPath) {
+//        ImageIcon playerIcon = new ImageIcon(playerFactionIconPath);
+//        Image scaledPlayerIcon = playerIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+//        playerFactionIcon = new JLabel();
+//        playerFactionIcon.setIcon(new ImageIcon(scaledPlayerIcon));
+//
+//        ImageIcon opponentIcon = new ImageIcon(opponentFactionIconPath);
+//        Image scaledOpponentIcon = opponentIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+//        opponentFactionIcon = new JLabel();
+//        opponentFactionIcon.setIcon(new ImageIcon(scaledOpponentIcon));
+//
+//        revalidate();
+//        repaint();
+//    }
 
     public void clearHand() {
         handPanel.removeAll();

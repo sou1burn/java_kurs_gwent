@@ -20,16 +20,16 @@ public class CardTest {
         Card meleeCard = new Card(5, "melee", "Melee Card", "src/nilfs/albrix.png");
         assertEquals(0, meleeCard.getRowIndex(), "Melee card should have row index 0");
 
-        Card midCard = new Card(5, "mid", "Mid Card", "path");
+        Card midCard = new Card(5, "mid", "Mid Card", "src/nilfs/albrix.png");
         assertEquals(1, midCard.getRowIndex(), "Mid card should have row index 1");
 
-        Card rangeCard = new Card(5, "range", "Range Card", "path");
+        Card rangeCard = new Card(5, "range", "Range Card", "src/nilfs/albrix.png");
         assertEquals(2, rangeCard.getRowIndex(), "Range card should have row index 2");
     }
 
     @Test
     public void testSetters() {
-        Card card = new Card(7, "long", "Dandelion", "path/to/image");
+        Card card = new Card(7, "long", "Dandelion", "src/nilfs/albrix.png");
 
         card.setPower(9);
         card.setType("melee");

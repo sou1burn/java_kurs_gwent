@@ -92,17 +92,17 @@ public class Round
             {
                 String fr1 = p1.getFraction();
                 String fr2 = p2.getFraction();
-                if (fr1.equals(fr2) && !fr1.equals("Nilfgaard"))
+                if (fr1.equals(fr2) && !fr1.equals("Нильфгаард"))
                 {
                     p1.roundLost();
                     p2.roundLost();
                     return null; 
                 } 
-                else if (!fr1.equals("Nilfgaard") && fr2.equals("Nilfgaard")) 
+                else if (!fr1.equals("Нильфгаард") && fr2.equals("Нильфгаард"))
                 {
                     return p2;
                 } 
-                else if (fr1.equals("Nilfgaard") && !fr2.equals("Nilfgaard")) 
+                else if (fr1.equals("Нильфгаард") && !fr2.equals("Нильфгаард"))
                 {
                     return p1;
                 } 

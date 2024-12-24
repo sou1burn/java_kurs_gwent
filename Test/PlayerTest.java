@@ -63,8 +63,8 @@ public class PlayerTest {
             List<Card> deck = new ArrayList<>();
             Player player = new Player("Northern Realms", deck, false);
 
-            Card meleeCard = new Card(10, "melee", "Geralt", "path/to/image");
-            Card midCard = new Card(5, "mid", "Mage", "path/to/image");
+            Card meleeCard = new Card(10, "melee", "Geralt", "src/nilfs/geralt.png");
+            Card midCard = new Card(5, "mid", "Mage", "src/nilfs/albrix.png");
 
             player.updateRowScore(meleeCard);
             player.updateRowScore(midCard);
@@ -90,7 +90,7 @@ public class PlayerTest {
             List<Card> deck = new ArrayList<>();
             Player player = new Player("Scoia'tael", deck, false);
 
-            Card card = new Card(5, "melee", "Geralt", "path/to/image");
+            Card card = new Card(5, "melee", "Geralt", "src/nilfs/albrix.png");
             player.addCardToHand(card);
 
             assertEquals(1, player.getHand().size());

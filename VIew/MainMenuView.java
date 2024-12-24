@@ -18,7 +18,7 @@ public class MainMenuView extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(4, 1, 10, 10)); // 4 строки, 1 столбец
+        buttonPanel.setLayout(new GridLayout(4, 1, 10, 10));
 
         startButton = new JButton("Начать игру");
         changeDeckButton = new JButton("Сменить колоду");
@@ -36,7 +36,6 @@ public class MainMenuView extends JFrame {
         currentDeckLabel.setFont(new Font("Arial", Font.BOLD, 16));
         deckPanel.add(currentDeckLabel, BorderLayout.CENTER);
 
-        // Используем JSplitPane для разделения окна
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, buttonPanel, deckPanel);
         splitPane.setDividerLocation(200); 
         splitPane.setEnabled(true);

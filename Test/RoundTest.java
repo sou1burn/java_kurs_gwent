@@ -24,8 +24,8 @@ public class RoundTest {
             deck2.add(new Card(i + 1, "mid", "Card " + (i + 1), "src/nilfs/albrix.png"));
         }
 
-        player1 = new Player("Fractions1", deck1, false);
-        player2 = new Player("Nilfgaard", deck2, true);
+        player1 = new Player("Fraction", deck1, false);
+        player2 = new Player("Нильфгаард", deck2, true);
 
         round = new Round(player1, player2, 1);
     }
@@ -56,7 +56,7 @@ public class RoundTest {
     public void testGetWinner() {
         player1.setState(true);
         player2.setState(true);
-        // Симуляция результатов
+
         player1.addPoints(15);
         player2.addPoints(10);
 
@@ -67,7 +67,7 @@ public class RoundTest {
     @Test
     public void testRoundInitialization() {
         Player p1 = new Player("Northern Kingdoms", new ArrayList<>(), false);
-        Player p2 = new Player("Nilfgaard", new ArrayList<>(), true);
+        Player p2 = new Player("Нильфгаард", new ArrayList<>(), true);
 
         Round round = new Round(p1, p2, 1);
         round.start(null);

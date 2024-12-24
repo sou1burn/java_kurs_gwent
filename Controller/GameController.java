@@ -38,7 +38,7 @@ public class GameController {
         deck2.resize();
         //src/assets/nilf.jpg
         //src/assets/sever.png
-        gameFieldView.updateFactions("src/assets/nilf.jpg", "src/assets/sever.png");
+        //gameFieldView.updateFactions("src/assets/nilf.jpg", "src/assets/sever.png");
         gameFieldView.setPlayerFractions(deck1.getFraction(), deck2.getFraction());
         this.p1 = new Player(deck1.getFraction(), deck1.getCards(), false);
         this.p2 = new Player(deck2.getFraction(), deck2.getCards(), true);

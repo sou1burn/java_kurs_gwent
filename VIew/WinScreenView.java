@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class WinScreenView extends JFrame {
     private JButton playAgainButton;
@@ -13,7 +14,7 @@ public class WinScreenView extends JFrame {
 
     public WinScreenView(String winner, Map<Integer, Integer> roundStats) {
         setTitle("Результаты игры");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 400);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -24,13 +25,15 @@ public class WinScreenView extends JFrame {
 
         StringBuilder statsBuilder = new StringBuilder();
         statsBuilder.append("Результаты по раундам:\n");
-        int roundNumber = 1;
-        for (Map.Entry<Integer, Integer> entry : roundStats.entrySet()) {
-            statsBuilder.append("Раунд ").append(roundNumber).append(": ")
-                    .append("Игрок 1: ").append(entry.getKey()).append(", ")
-                    .append("Игрок 2: ").append(entry.getValue()).append("\n");
-            roundNumber++;
-        }
+        AtomicInteger roundNumber = new AtomicInteger(1);
+        roundStats.entrySet().stream()
+                .sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey())) // Сортировка в обратном порядке по ключу
+                .forEachOrdered(entry -> {
+                    statsBuilder.append("Раунд ").append(roundNumber.get()).append(": ")
+                            .append("Игрок 1: ").append(entry.getKey()).append(", ")
+                            .append("Игрок 2: ").append(entry.getValue()).append("\n");
+                    roundNumber.getAndIncrement();
+                });
 
         roundStatsArea = new JTextArea(statsBuilder.toString());
         roundStatsArea.setEditable(false);
@@ -46,7 +49,7 @@ public class WinScreenView extends JFrame {
         buttonPanel.add(backToMenuButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        setVisible(true); // Отображаем окно
+        setVisible(true);
     }
 
     public void addPlayAgainListener(ActionListener listener) {

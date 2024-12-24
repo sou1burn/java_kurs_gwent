@@ -11,5 +11,4 @@ import org.junit.runners.Suite;
         CardTest.class
 })
 public class Test {
-    // Тестовый Suite для JUnit 4
 }
